@@ -10,7 +10,6 @@ import UnitSelectPage from './pages/UnitSelectPage';
 import MenuPage       from './pages/MenuPage';
 import CheckoutPage   from './pages/CheckoutPage';
 import TrackingPage   from './pages/TrackingPage';
-import LGPDPage       from './pages/LGPDPage';
 
 function AppRoutes() {
   return (
@@ -18,7 +17,6 @@ function AppRoutes() {
       <Navbar />
       <Routes>
         <Route path="/auth" element={<AuthPage />} />
-        <Route path="/lgpd" element={<LGPDPage />} />
 
         <Route path="/" element={
           <ProtectedRoute><UnitSelectPage /></ProtectedRoute>
