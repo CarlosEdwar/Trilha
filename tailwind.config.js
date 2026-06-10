@@ -5,29 +5,28 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#FF6B35',
-          light:   '#FF8C5A',
-          dark:    '#E55A24',
+          DEFAULT: '#22C55E',
+          light:   '#4ADE80',
+          dark:    '#16A34A',
         },
         surface: {
-          DEFAULT: '#0A0A0F',
-          card:    '#111118',
-          glass:   'rgba(17,17,24,0.85)',
-          border:  'rgba(255,255,255,0.08)',
+          DEFAULT: '#000000',
+          card:    '#0A0A0A',
+          glass:   'rgba(10,10,10,0.9)',
+          border:  'rgba(255,255,255,0.06)',
         },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
-      backdropBlur: { glass: '20px' },
+      backdropBlur: { glass: '12px' },
       animation: {
-        'fade-in':    'fadeIn 0.3s ease',
-        'slide-up':   'slideUp 0.35s ease',
-        'pulse-slow': 'pulse 3s infinite',
+        'fade-in':    'fadeIn 0.25s ease',
+        'slide-up':   'slideUp 0.3s ease',
       },
       keyframes: {
         fadeIn:  { from: { opacity: 0 }, to: { opacity: 1 } },
-        slideUp: { from: { opacity: 0, transform: 'translateY(16px)' }, to: { opacity: 1, transform: 'translateY(0)' } },
+        slideUp: { from: { opacity: 0, transform: 'translateY(12px)' }, to: { opacity: 1, transform: 'translateY(0)' } },
       },
     },
   },
