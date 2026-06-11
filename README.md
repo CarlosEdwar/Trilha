@@ -1,6 +1,6 @@
-# Raízes do Sul de Minas — Sistema de Pedidos
+# Raízes do Nordeste no Sul de Minas — Sistema de Pedidos
 
-Aplicação React para sistema de pedidos de uma rede de lanchonetes, com design minimalista em verde e preto.
+Aplicação feita em React para sistema de pedidos de uma rede de lanchonetes, com paleta de cores em verde e preto.
 
 ## Visão Geral
 
@@ -45,10 +45,10 @@ Três unidades disponíveis no Sul de Minas:
 
 ### 6. Acompanhamento de Pedidos
 - Timeline visual com 4 estágios:
-  1. 📥 Pedido Recebido
-  2. 👨‍🍳 Em Preparo
-  3. ✅ Pronto
-  4. 🛵 Entregue
+  1. Pedido Recebido
+  2. Em Preparo
+  3. Pronto
+  4. Entregue
 - Progressão automática simulada
 - Histórico de pedidos
 
@@ -125,9 +125,6 @@ npm run preview
 ### Princípios
 - Minimalismo visual
 - Contraste adequado
-- Transições sutis (250-300ms)
 - Mobile-first
 
-## Projeto Acadêmico
-
-Este é um protótipo para fins educacionais. Dados e funcionalidades de pagamento são simulados.
+## Projeto Trilha-Front

@@ -27,13 +27,11 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 bg-surface-glass backdrop-blur-glass border-b border-surface-border">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
 
-        {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
           <img src={restauranteIcon} alt="Raízes Logo" className="w-6 h-6 object-contain" />
-          <span className="font-semibold text-base tracking-tight text-white">Raízes<span className="text-primary">.</span></span>
+          <span className="font-semibold text-base tracking-tight text-white">Raízes do Nordeste<span className="text-primary"></span></span>
         </Link>
 
-        {/* Unidade escolhida */}
         {unit && (
           <button
             onClick={() => navigate('/')}
@@ -45,7 +43,6 @@ export default function Navbar() {
         )}
 
         <div className="flex items-center gap-2 ml-auto">
-          {/* Canal */}
           <span className={`badge ${CHANNEL_COLORS[channel]} hidden sm:inline-flex text-xs`}>
             {channel}
           </span>

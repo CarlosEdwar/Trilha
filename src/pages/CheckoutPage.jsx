@@ -36,14 +36,12 @@ export default function CheckoutPage() {
     discountCoupon = subtotal * (activeCoupon.discountPercent / 100);
   }
 
-  // Fidelidade: cada ponto vale R$ 0.10.
   const canUseLoyalty = (user?.points || 0) >= 50;
   let discountLoyalty = 0;
   let pointsToUse = 0;
 
   if (useLoyalty && canUseLoyalty) {
     const pointsAvailable = user.points || 0;
-    // Usa no máximo os pontos necessários para zerar o pedido ou todos disponíveis
     const maxDiscountAllowed = subtotal - discountCoupon;
     const pointsNeeded = Math.min(pointsAvailable, Math.floor(maxDiscountAllowed / 0.10));
 
