@@ -1,13 +1,12 @@
 import { createContext, useContext, useReducer, useEffect } from 'react';
-import { safeGetItem, safeSetItem } from '../utils/storage';
 
 const CartContext = createContext(null);
 
 const CART_KEY   = 'raizes_cart';
 const ORDERS_KEY = 'raizes_orders';
 
-function loadCart()   { return safeGetItem(CART_KEY, []); }
-function loadOrders() { return safeGetItem(ORDERS_KEY, []); }
+function loadCart()   { return JSON.parse(localStorage.getItem(CART_KEY)   || '[]'); }
+function loadOrders() { return JSON.parse(localStorage.getItem(ORDERS_KEY) || '[]'); }
 
 const initialState = { items: loadCart(), orders: loadOrders(), unitId: null };
 
@@ -63,8 +62,8 @@ export function CartProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   /* Persiste carrinho e pedidos */
-  useEffect(() => { safeSetItem(CART_KEY,   state.items);  }, [state.items]);
-  useEffect(() => { safeSetItem(ORDERS_KEY, state.orders); }, [state.orders]);
+  useEffect(() => { localStorage.setItem(CART_KEY,   JSON.stringify(state.items));  }, [state.items]);
+  useEffect(() => { localStorage.setItem(ORDERS_KEY, JSON.stringify(state.orders)); }, [state.orders]);
 
   const total = state.items.reduce((s, i) => s + i.price * i.qty, 0);
   const count = state.items.reduce((s, i) => s + i.qty, 0);

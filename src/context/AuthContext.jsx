@@ -1,5 +1,4 @@
 import { createContext, useContext, useReducer, useEffect, useState } from 'react';
-import { safeGetItem, safeSetItem } from '../utils/storage';
 
 const AuthContext = createContext(null);
 
@@ -16,16 +15,16 @@ const DEFAULT_USER = {
 };
 
 function getUsers() {
-  const users = safeGetItem(USERS_KEY, []);
+  const users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
   if (!users.find(u => u.email === DEFAULT_USER.email)) {
     users.push(DEFAULT_USER);
-    safeSetItem(USERS_KEY, users);
+    localStorage.setItem(USERS_KEY, JSON.stringify(users));
   }
   return users;
 }
 
 function getSession() {
-  return safeGetItem(STORAGE_KEY, null);
+  return JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
 }
 
 const initialState = { user: null, error: null };
@@ -55,7 +54,7 @@ export function AuthProvider({ children }) {
 
   // Persiste
   useEffect(() => {
-    safeSetItem(STORAGE_KEY, state.user);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state.user));
   }, [state.user]);
 
   function register({ name, email, password }) {
@@ -72,7 +71,7 @@ export function AuthProvider({ children }) {
       points: 50,
       createdAt: Date.now()
     };
-    safeSetItem(USERS_KEY, [...users, user]);
+    localStorage.setItem(USERS_KEY, JSON.stringify([...users, user]));
     dispatch({ type: 'LOGIN', payload: { id: user.id, name, email, points: 50 } });
     return true;
   }
@@ -100,7 +99,7 @@ export function AuthProvider({ children }) {
     const updated = users.map(u =>
       u.id === state.user.id ? { ...u, points: newPoints } : u
     );
-    safeSetItem(USERS_KEY, updated);
+    localStorage.setItem(USERS_KEY, JSON.stringify(updated));
   }
 
   function usePoints(amount) {
@@ -115,7 +114,7 @@ export function AuthProvider({ children }) {
     const updated = users.map(u =>
       u.id === state.user.id ? { ...u, points: newPoints } : u
     );
-    safeSetItem(USERS_KEY, updated);
+    localStorage.setItem(USERS_KEY, JSON.stringify(updated));
     return true;
   }
 
