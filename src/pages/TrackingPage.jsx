@@ -12,29 +12,31 @@ function StatusTimeline({ statusIdx }) {
       {ORDER_STATUSES.map((s, i) => {
         const Icon = STATUS_ICONS[i];
         const isCompleted = i <= statusIdx;
+        const isCurrent = i === statusIdx;
+
         return (
           <div key={s.key} className="flex items-center flex-1 last:flex-none">
             <div className="flex flex-col items-center">
               <div
-                className={`w-7 h-7 rounded-full flex items-center justify-center border
+                className={`w-8 h-8 rounded-full flex items-center justify-center border-2 transition-colors
                   ${isCompleted
-                    ? 'bg-white/10 border-white/20'
-                    : 'bg-transparent border-white/10'
+                    ? 'bg-emerald-500/10 border-emerald-500/30'
+                    : 'bg-transparent border-white/5'
                   }`}
               >
                 <Icon
-                  className={`w-3 h-3 ${isCompleted ? 'text-white/70' : 'text-white/30'}`}
+                  className={`w-3.5 h-3.5 ${isCompleted ? 'text-emerald-400' : 'text-white/10'}`}
                 />
               </div>
-              <span className={`mt-1 text-[9px] ${isCompleted ? 'text-white/70' : 'text-white/30'}`}>
+              <span className={`mt-1 text-[9px] ${isCurrent ? 'text-emerald-400' : isCompleted ? 'text-emerald-500/50' : 'text-white/15'}`}>
                 {s.label}
               </span>
             </div>
 
             {i < ORDER_STATUSES.length - 1 && (
-              <div className="flex-1 h-px mx-1 bg-white/10">
+              <div className="flex-1 h-0.5 mx-1.5 bg-white/5 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-white/20 transition-all duration-500"
+                  className="h-full bg-emerald-500/30 transition-all duration-500"
                   style={{ width: i < statusIdx ? '100%' : '0%' }}
                 />
               </div>
@@ -63,42 +65,47 @@ function OrderCard({ order, onAdvance }) {
   }, [order.statusIdx, order.id, isDone, onAdvance]);
 
   return (
-    <div className="p-4 border border-white/10 rounded-lg bg-white/5">
+    <div className="glass-card p-4">
       <div className="flex items-start justify-between gap-3 mb-4">
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2 mb-1 flex-wrap">
-            <span className="font-mono text-xs text-white/80">
+          <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+            <span className="font-mono text-xs text-emerald-300/70">
               #{order.id.slice(0, 8).toUpperCase()}
             </span>
-            <span className="px-2 py-0.5 rounded text-[10px] bg-white/10 text-white/70">
+            <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium
+              ${isDone
+                ? 'bg-emerald-500/10 text-emerald-400'
+                : 'bg-emerald-500/5 text-emerald-400/70'
+              }`}
+            >
               {status.label}
             </span>
           </div>
-          <div className="flex items-center gap-2 text-[10px] text-white/40 flex-wrap">
+          <div className="flex items-center gap-2 text-[10px] text-white/25 flex-wrap">
             <span className="flex items-center gap-1">
-              <MapPin className="w-3 h-3" />
+              <MapPin className="w-3 h-3 text-emerald-500/40" />
               {unit?.name}
             </span>
             <span className="flex items-center gap-1">
-              <Clock className="w-3 h-3" />
+              <Clock className="w-3 h-3 text-emerald-500/40" />
               {time}
             </span>
           </div>
         </div>
-        <span className="text-sm text-white/80 shrink-0">
+        <span className="text-sm font-medium text-emerald-300/80 shrink-0">
           {order.total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
         </span>
       </div>
 
       <StatusTimeline statusIdx={order.statusIdx} />
 
-      <div className="mt-4 pt-3 border-t border-white/10">
-        <p className="text-[10px] text-white/40 mb-2">Itens</p>
+      <div className="mt-4 pt-3 border-t border-white/5">
+        <p className="text-[10px] text-emerald-500/40 mb-2 font-medium uppercase tracking-wider">Itens</p>
         <div className="flex flex-wrap gap-1.5">
           {order.items.map(item => (
             <span
               key={item.id}
-              className="px-2 py-1 rounded bg-white/10 text-[10px] text-white/60"
+              className="px-2.5 py-1 rounded-md bg-emerald-500/5 text-[10px] text-emerald-200/50 border border-emerald-500/10"
             >
               {item.qty}× {item.name}
             </span>
@@ -111,17 +118,20 @@ function OrderCard({ order, onAdvance }) {
 
 function EmptyState({ onAction }) {
   return (
-    <div className="flex flex-col items-center justify-center gap-4 py-20 px-4 text-center">
-      <ShoppingBag className="w-10 h-10 text-white/30" />
+    <div className="flex flex-col items-center justify-center gap-5 py-20 px-4 text-center">
+      <div className="w-14 h-14 rounded-xl bg-emerald-500/5 flex items-center justify-center border border-emerald-500/10">
+        <ShoppingBag className="w-6 h-6 text-emerald-500/30" />
+      </div>
       <div>
-        <p className="text-sm text-white/60 mb-1">Nenhum pedido ainda</p>
-        <p className="text-xs text-white/30">Seus pedidos aparecerão aqui</p>
+        <p className="text-sm text-white/40 mb-1">Nenhum pedido ainda</p>
+        <p className="text-xs text-white/20">Seus pedidos aparecerão aqui</p>
       </div>
       <button
         onClick={onAction}
-        className="text-sm text-white/70 hover:text-white/90 hover:underline transition-colors"
+        className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-emerald-500/10 text-emerald-400/80 text-sm font-medium hover:bg-emerald-500/15 transition-colors border border-emerald-500/15"
       >
         Fazer primeiro pedido
+        <ArrowRight className="w-4 h-4" />
       </button>
     </div>
   );
@@ -138,7 +148,7 @@ export default function TrackingPage() {
       <div className="max-w-xl mx-auto px-4 py-6">
         <div className="mb-6">
           <h1 className="text-lg font-medium text-white">Meus pedidos</h1>
-          <p className="text-xs text-white/40 mt-0.5">
+          <p className="text-xs text-white/20 mt-0.5">
             {sorted.length} pedido{sorted.length > 1 ? 's' : ''}
           </p>
         </div>
@@ -146,7 +156,7 @@ export default function TrackingPage() {
         {sorted.length === 0 ? (
           <EmptyState onAction={() => navigate('/')} />
         ) : (
-          <div className="space-y-3">
+          <div className="space-y-4">
             {sorted.map(order => (
               <OrderCard
                 key={order.id}
