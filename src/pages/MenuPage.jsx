@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Plus, Minus, ShoppingCart, MapPin, ArrowLeft, TicketPercent } from 'lucide-react';
+import { Search, Plus, Minus, ShoppingCart, MapPin, ArrowLeft, TicketPercent, ShieldCheck } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
 import { PRODUCTS, CATEGORIES, UNITS, CAMPAIGNS } from '../data/seed';
@@ -170,7 +170,7 @@ export default function MenuPage() {
             className="w-full bg-primary hover:bg-primary-dark text-white rounded-xl px-5 py-3.5 flex items-center justify-between font-medium transition-all shadow-lg"
           >
             <div className="flex items-center gap-2">
-              <div className="bg-white/20 w-7 h-7 rounded-lg flex items-center justify-center">
+               <div className="bg-white/20 w-7 h-7 rounded-lg flex items-center justify-center">
                 <ShoppingCart className="w-4 h-4" />
               </div>
               <span className="text-sm">{count} {count === 1 ? 'item' : 'itens'}</span>
@@ -179,6 +179,21 @@ export default function MenuPage() {
           </button>
         </div>
       )}
+
+      <div className="max-w-3xl mx-auto px-4 mt-8 pb-8">
+        <div className="pt-6 border-t border-white/10 text-center">
+          <div className="flex items-center justify-center gap-2 mb-2 text-white/30">
+            <ShieldCheck className="w-4 h-4" />
+            <span className="text-xs font-medium uppercase tracking-wider">
+              Proteção de Dados
+            </span>
+          </div>
+          <p className="text-xs text-white/30 leading-relaxed max-w-sm mx-auto">
+            Seus dados pessoais são tratados com segurança e transparência, em
+            conformidade com a LGPD. Ao continuar você concorda com os termos.
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

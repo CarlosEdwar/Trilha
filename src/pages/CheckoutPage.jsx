@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Minus, Plus, Trash2, CreditCard, Banknote, QrCode, ArrowLeft, CheckCircle, Ticket, Star, Loader2, ExternalLink } from 'lucide-react';
+import { Minus, Plus, Trash2, CreditCard, Banknote, QrCode, ArrowLeft, CheckCircle, Ticket, Star, Loader2, ExternalLink, ShieldCheck } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
@@ -323,6 +323,19 @@ export default function CheckoutPage() {
           >
             Pagar com Gateway Seguro <ExternalLink className="w-4 h-4" />
           </button>
+
+          <div className="mt-8 pt-6 border-t border-white/10 text-center">
+            <div className="flex items-center justify-center gap-2 mb-2 text-white/30">
+              <ShieldCheck className="w-4 h-4" />
+              <span className="text-xs font-medium uppercase tracking-wider">
+                Proteção de Dados
+              </span>
+            </div>
+            <p className="text-xs text-white/30 leading-relaxed max-w-sm mx-auto">
+              Seus dados pessoais são tratados com segurança e transparência, em
+              conformidade com a LGPD. Ao continuar você concorda com os termos.
+            </p>
+          </div>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShoppingBag, Clock, ArrowRight, MapPin, Package, ChefHat, Truck, CheckCircle2 } from 'lucide-react';
+import { ShoppingBag, Clock, ArrowRight, MapPin, Package, ChefHat, Truck, CheckCircle2, ShieldCheck } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { UNITS, ORDER_STATUSES, STATUS_DELAYS } from '../data/seed';
 
@@ -166,6 +166,19 @@ export default function TrackingPage() {
             ))}
           </div>
         )}
+
+        <div className="mt-8 pt-6 border-t border-white/10 text-center">
+          <div className="flex items-center justify-center gap-2 mb-2 text-white/30">
+            <ShieldCheck className="w-4 h-4" />
+            <span className="text-xs font-medium uppercase tracking-wider">
+              Proteção de Dados
+            </span>
+          </div>
+          <p className="text-xs text-white/30 leading-relaxed max-w-sm mx-auto">
+            Seus dados pessoais são tratados com segurança e transparência, em
+            conformidade com a LGPD. Ao continuar você concorda com os termos.
+          </p>
+        </div>
       </div>
     </div>
   );
